@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   
-  =============================
-  ==== Hardware & Firmware ====
-  =============================
+  # =============================
+  # ==== Hardware & Firmware ====
+  # =============================
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" ];
   hardware.enableAllFirmware = true;
@@ -22,9 +22,9 @@
     dates = "reboot"; 
   };
 
-  =============================
-  ==== Apps and tools      ====
-  =============================
+  # =============================
+  # ==== Apps and tools      ====
+  # =============================
 
   environment.systemPackages = with pkgs; [
     tor-browser
