@@ -1,7 +1,7 @@
 # auto-nix
 
 1. Boot your target laptop/VM from a standard nixos USB.
-2. Chnage keyboard layout ``loadkeys dk`
+2. Chnage keyboard layout ``loadkeys dk`` 
    
 
 
