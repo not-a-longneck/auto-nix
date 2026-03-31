@@ -1,13 +1,12 @@
-{
+{ device ? "/dev/vda", ... }: { 
   disko.devices = {
-    # 1. This tells NixOS: "The main OS and User files live in RAM"
     nodev."/" = {
       fsType = "tmpfs";
-      mountOptions = [ "size=24G" "mode=755" ]; # Reserve 24GB of your 32GB RAM
+      mountOptions = [ "size=24G" "mode=755" ];
     };
 
     disk.main = {
-      device = "/dev/sda"; # We override this to /dev/nvme0n1 if needed
+      device = device; # Now dynamic!
       type = "disk";
       content = {
         type = "gpt";
@@ -17,7 +16,6 @@
             type = "EF00";
             content = { type = "filesystem"; format = "vfat"; mountpoint = "/boot"; };
           };
-          # 2. This is the 50% "System" partition for Apps/Drivers
           nixos = {
             size = "30%"; 
             content = {
@@ -26,12 +24,11 @@
               mountpoint = "/nix"; 
             };
           };
-          # 3. This is the"Privacy" partition (Randomly Encrypted Swap)
           swap = {
             size = "100%"; 
             content = {
               type = "swap";
-              randomEncryption = true; # New key every boot!
+              randomEncryption = true;
             };
           };
         };
