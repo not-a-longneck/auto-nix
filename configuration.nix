@@ -69,7 +69,7 @@
 
   environment.shellAliases = {
       # Now you just type 'update-me' and your password!
-      update-me = "sudo nixos-rebuild switch --flake github:not-a-longneck/auto-nix#secure-laptop";
+      nix-save = "sudo nixos-rebuild switch --flake github:not-a-longneck/auto-nix#secure-laptop";
   };
 
 
