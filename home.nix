@@ -7,9 +7,12 @@
 
   # This is where your user-specific apps go now
   home.packages = with pkgs; [
+
     vlc
-    # any other user apps...
+    tor-browser
+
   ];
+
 
   # VLC Config
   home.file.".config/vlc/vlcrc".text = ''
