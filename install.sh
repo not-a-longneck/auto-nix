@@ -3,7 +3,7 @@ set -e
 
 # --- CONFIGURATION ---
 # The GitHub Flake to use
-FLAKE="github:not-a-teletubby/auto-nix#secure-laptop"
+FLAKE="github:not-a-longneck/auto-nix#secure-laptop"
 
 echo "🚀 Starting One-Click Privacy NixOS Installation..."
 
