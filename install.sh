@@ -1,24 +1,31 @@
 #!/usr/bin/env bash
 set -e
 
-# --- CONFIGURATION ---
-# The GitHub Flake to use
 FLAKE="github:not-a-longneck/auto-nix#secure-laptop"
 
 echo "🚀 Starting One-Click Privacy NixOS Installation..."
 
-# 1. Partition and Format the Disk using Disko
-# This reads your 30% System / 70% Encrypted Swap layout
+# Auto-detect the primary disk (picks the first non-USB, non-loop disk)
+DISK=$(lsblk -dpno NAME,TYPE,TRAN | awk '$2=="disk" && $3!="usb" {print $1; exit}')
+
+if [ -z "$DISK" ]; then
+  echo "❌ Could not auto-detect a disk. Please set DISK manually."
+  exit 1
+fi
+
+echo "💽 Detected disk: $DISK"
 echo "💾 Partitioning disks..."
+
+# The magic line that passes the detected disk to the Nix code
 sudo nix --extra-experimental-features "nix-command flakes" \
   run github:nix-community/disko -- \
   --mode disko \
-  --flake "$FLAKE"
+  --flake "$FLAKE" \
+  --argstr device "$DISK" # Use --argstr for cleaner passing of strings
 
-# 2. Install the NixOS System
-echo "🏗️ Installing NixOS (this may take a few minutes)..."
+echo "🏗️ Installing NixOS..."
 sudo nixos-install --flake "$FLAKE" --no-root-passwd
 
-echo "✅ Installation complete! Rebooting in 5 seconds..."
+echo "✅ Done! Rebooting in 5 seconds..."
 sleep 5
 sudo reboot
