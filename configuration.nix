@@ -13,7 +13,7 @@
   networking.networkmanager.enable = true;
   networking.hostName = "secure-laptop";
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" "virtio_blk" ];
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
