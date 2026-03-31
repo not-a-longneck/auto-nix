@@ -11,6 +11,10 @@
     veracrypt # Added here to ensure the desktop shortcut finds the icon
   ];
 
+###################################
+#### PROGRAM SPECIFIC SETTINGS ####
+###################################
+
   # VLC Config
   home.file.".config/vlc/vlcrc".text = ''
     [core]
@@ -35,6 +39,11 @@
     user_pref("intl.locale.requested", "en-US");
     user_pref("browser.toolbars.bookmarks.visibility", "never");
   '';
+
+###################################
+#### PLASMA  SPECIFIC SETTINGS ####
+###################################
+
 
   # Create Desktop Shortcut
   home.file."Desktop/veracrypt.desktop".source = 
