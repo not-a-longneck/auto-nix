@@ -7,6 +7,8 @@
 
 Install remotely from another machine on a local network:
 
+```
 nix run github:nix-community/nixos-anywhere -- \
   --flake github:not-a-teletubby/auto-nix#secure-laptop \
   root@<TARGET-IP-ADDRESS>
+```
