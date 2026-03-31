@@ -59,17 +59,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # Enable Sound with Pipewire
-    sound.enable = true;
-    hardware.pulseaudio.enable = false; # Pipewire replaces this
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-
   # User Setup
 
   # Define your personal user
