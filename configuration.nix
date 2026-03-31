@@ -67,6 +67,12 @@
     ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
   '';
 
+  environment.shellAliases = {
+      # Now you just type 'update-me' and your password!
+      update-me = "sudo nixos-rebuild switch --flake github:not-a-longneck/auto-nix#secure-laptop";
+  };
+
+
 
   # =============================
   # ====   User and login    ====
