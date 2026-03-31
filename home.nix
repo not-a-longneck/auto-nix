@@ -3,37 +3,26 @@
 {
   home.username = "admin";
   home.homeDirectory = "/home/admin";
-  home.stateVersion = "23.11"; # Match your initial install version
+  home.stateVersion = "23.11";
 
-  # This is where your user-specific apps go now
   home.packages = with pkgs; [
-
     vlc
     tor-browser
-
+    veracrypt # Added here to ensure the desktop shortcut finds the icon
   ];
-
 
   # VLC Config
   home.file.".config/vlc/vlcrc".text = ''
     [core]
-    # Allow metadata = no
     metadata-network-access=0
-    # Show hidden files = yes
     show-hiddenfiles=1
-    # Playlist: display playlist tree = yes
     playlist-tree=1
-    # Subdirectory behaviour = expand (0=default, 1=collapse, 2=expand)
     recursive=2
-    # Play files randomly forever = yes
     random=1
     loop=1
-
     [qt]
-    # Privacy popups = no
     qt-privacy-ask=0
     qt-notification=0
-    # Resize video to interface = no
     qt-video-autoresize=0
   '';
 
@@ -47,36 +36,19 @@
     user_pref("browser.toolbars.bookmarks.visibility", "never");
   '';
 
-
-
-programs.plasma = {
-    enable = true;
-    # This modifies the existing "Task Manager" widget
-    # instead of creating a brand new panel.
-    configFile."plasmashellrc"."Favorite Apps"."value" = 
-      "org.torproject.torbrowser.desktop,
-      vlc.desktop,org.kde.dolphin.desktop,
-      org.kde.konsole.desktop",
-      pyload.desktop
-    ;
-  };
-
-# This creates the Desktop icon
+  # Create Desktop Shortcut
   home.file."Desktop/veracrypt.desktop".source = 
     "${pkgs.veracrypt}/share/applications/veracrypt.desktop";
 
-  # Ensure the desktop is set to "Folder View" mode so you can see the icon
   programs.plasma = {
     enable = true;
-    # Keep your taskbar favorites from before
-    configFile."plasmashellrc"."Favorite Apps"."value" = 
-      "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
+
+    # Corrected: No spaces or newlines inside the value string
+    configFile."plasmashellrc"."Favorite Apps"."value" = "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
     
-    # This ensures the desktop actually displays icons
-    configFile."plasma-org.kde.plasma.desktop-appletsrc"."Serialization"]["Applets"]["20"]["Configuration"]["ConfigGroupDefault"]["plugin" = "org.kde.plasma.folderview";
+    # Corrected: Fixed brackets for the Folder View plugin
+    configFile."plasma-org.kde.plasma.desktop-appletsrc"."Serialization"."Applets"."20"."Configuration"."ConfigGroupDefault"."plugin" = "org.kde.plasma.folderview";
   };
 
-
-  # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 }
