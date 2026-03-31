@@ -1,6 +1,9 @@
 { pkgs, ... }: {
 
-  
+  imports = [
+      ./disko-config.nix  # <--- ADD THIS LINE
+    ];
+
   # =============================
   # ==== Hardware & Firmware ====
   # =============================
