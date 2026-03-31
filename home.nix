@@ -52,11 +52,14 @@
   programs.plasma = {
     enable = true;
 
-    # Corrected: No spaces or newlines inside the value string
+    # Taskbar Favorites
     configFile."plasmashellrc"."Favorite Apps"."value" = "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
     
-    # Corrected: Fixed brackets for the Folder View plugin
-    configFile."plasma-org.kde.plasma.desktop-appletsrc"."Serialization"."Applets"."20"."Configuration"."ConfigGroupDefault"."plugin" = "org.kde.plasma.folderview";
+    # Desktop Icons (Folder View)
+    # This version uses the "attribute set" style which is much safer for Nix
+    configFile."plasma-org.kde.plasma.desktop-appletsrc" = {
+      "Serialization"."Applets"."20"."Configuration"."ConfigGroupDefault"."plugin" = "org.kde.plasma.folderview";
+    };
   };
 
   programs.home-manager.enable = true;
