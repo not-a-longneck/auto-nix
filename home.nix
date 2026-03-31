@@ -50,17 +50,17 @@
     "${pkgs.veracrypt}/share/applications/veracrypt.desktop";
 
   programs.plasma = {
-    enable = true;
-
-    # Taskbar Favorites
-    configFile."plasmashellrc"."Favorite Apps"."value" = "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
-    
-    # Desktop Icons (Folder View)
-    # This version uses the "attribute set" style which is much safer for Nix
-    configFile."plasma-org.kde.plasma.desktop-appletsrc" = {
-      "Serialization"."Applets"."20"."Configuration"."ConfigGroupDefault"."plugin" = "org.kde.plasma.folderview";
+      enable = true;
+  
+      # Taskbar Favorites - keep this as a single string
+      configFile."plasmashellrc"."Favorite Apps"."value" = "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
+      
+      # Desktop Icons (Folder View)
+      # Using the nested style ensures Nix doesn't trip over the "20"
+      configFile."plasma-org.kde.plasma.desktop-appletsrc" = {
+        Serialization.Applets."20".Configuration.ConfigGroupDefault.plugin = "org.kde.plasma.folderview";
+      };
     };
-  };
 
   programs.home-manager.enable = true;
 }
