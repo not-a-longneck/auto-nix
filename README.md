@@ -5,16 +5,7 @@
 3. Type passwd and set a password to nixos.
 
 
-Install remotely from another machine on a local network:
-
-```
-nix run github:nix-community/nixos-anywhere -- \
-  --flake github:not-a-teletubby/auto-nix#secure-laptop \
-  root@<TARGET-IP-ADDRESS>
-```
-
-
-Or, from target computer run:
+From target computer run:
 
 ```
 sudo nix --extra-experimental-features "nix-command flakes" \
