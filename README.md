@@ -8,5 +8,5 @@
 From target computer run:
 
 ```
-curl -L nix.mylink.com | bash
+curl -L nix.mylink.com | sudo bash
 ```
