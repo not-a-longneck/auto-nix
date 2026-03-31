@@ -8,12 +8,14 @@
   # bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "video=1920x1080" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" "virtio_blk" ];
+
 
   # Enable networking  
   networking.networkmanager.enable = true;
   networking.hostName = "secure-laptop";
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" "virtio_blk" ];
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
@@ -69,7 +71,7 @@
 
   environment.shellAliases = {
       # Now you just type 'update-me' and your password!
-      nix-save = "sudo nixos-rebuild switch --flake github:not-a-longneck/auto-nix#secure-laptop";
+      nix-save = "sudo nixos-rebuild switch --flake github:not-a-longneck/auto-nix#secure-laptop --no-write-lock-file";
   };
 
 
