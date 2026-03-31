@@ -1,8 +1,17 @@
 { pkgs, ... }: {
+
   
   # =============================
   # ==== Hardware & Firmware ====
   # =============================
+
+  # bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Enable networking  
+  networking.networkmanager.enable = true;
+  networking.hostName = "secure-laptop";
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" "nvme" "usb_storage" ];
   hardware.enableAllFirmware = true;
@@ -40,14 +49,30 @@
   services.tor.enable = true;
   services.tor.client.enable = true;
 
-  # 5. Desktop Environment (GNOME)
+
+
+  # =============================
+  # ====     Desktop Env     ====
+  # =============================
+
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  # 6. User Setup
+  # Enable Sound with Pipewire
+    sound.enable = true;
+    hardware.pulseaudio.enable = false; # Pipewire replaces this
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
 
-# Define your personal user
+  # User Setup
+
+  # Define your personal user
   users.users.admin = {
     isNormalUser = true;
     description = "Privacy User";
