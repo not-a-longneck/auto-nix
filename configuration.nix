@@ -56,10 +56,22 @@
   # =============================
 
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Gnome
+  # services.xserver.displayManager.gdm.enable = true; 
+  # services.xserver.desktopManager.gnome.enable = true;
 
-  # User Setup
+  # KDE
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.setupCommands = ''
+    ${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 1920x1080
+  '';
+
+
+  # =============================
+  # ====   User and login    ====
+  # =============================
+
 
   # Define your personal user
   users.users.admin = {
