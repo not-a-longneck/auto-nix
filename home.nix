@@ -39,24 +39,12 @@
 
   # Tor browser
   home.file.".tor project/TorBrowser/Data/Browser/profile.default/user.js".text = ''
-
-    // --- Privacy & Security ---
     user_pref("javascript.enabled", false);
-    user_pref("intl.accept_languages", "en-US, en");
-    user_pref("intl.locale.requested", "en-US");
-
-    // --- UI & Behavior ---
-    // Hide Bookmark Bar (2 = never)
-    user_pref("browser.toolbars.bookmarks.visibility", "never");
-    
-    // Always connect automatically
     user_pref("extensions.torlauncher.prompt_at_startup", false);
     user_pref("network.bootstrapped", true);
-
-    // --- Extra Hardening ---
-    user_pref("privacy.resistFingerprinting", true);
-    user_pref("webgl.disabled", true);
-    
+    user_pref("intl.accept_languages", "en-US, en");
+    user_pref("intl.locale.requested", "en-US");
+    user_pref("browser.toolbars.bookmarks.visibility", "never");
   '';
 
 
