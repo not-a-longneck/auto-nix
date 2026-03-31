@@ -40,9 +40,7 @@
   # =============================
 
   environment.systemPackages = with pkgs; [
-    tor-browser
     firefox
-    vlc
     veracrypt
     pyload-ng
     sunshine
