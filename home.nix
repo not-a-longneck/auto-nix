@@ -49,6 +49,34 @@
 
 
 
+programs.plasma = {
+    enable = true;
+    # This modifies the existing "Task Manager" widget
+    # instead of creating a brand new panel.
+    configFile."plasmashellrc"."Favorite Apps"."value" = 
+      "org.torproject.torbrowser.desktop,
+      vlc.desktop,org.kde.dolphin.desktop,
+      org.kde.konsole.desktop",
+      pyload.desktop
+    ;
+  };
+
+# This creates the Desktop icon
+  home.file."Desktop/veracrypt.desktop".source = 
+    "${pkgs.veracrypt}/share/applications/veracrypt.desktop";
+
+  # Ensure the desktop is set to "Folder View" mode so you can see the icon
+  programs.plasma = {
+    enable = true;
+    # Keep your taskbar favorites from before
+    configFile."plasmashellrc"."Favorite Apps"."value" = 
+      "systemsettings.desktop,org.kde.dolphin.desktop,org.torproject.torbrowser.desktop,vlc.desktop,veracrypt.desktop,pyload.desktop";
+    
+    # This ensures the desktop actually displays icons
+    configFile."plasma-org.kde.plasma.desktop-appletsrc"."Serialization"]["Applets"]["20"]["Configuration"]["ConfigGroupDefault"]["plugin" = "org.kde.plasma.folderview";
+  };
+
+
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 }
