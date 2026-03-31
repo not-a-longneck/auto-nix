@@ -25,13 +25,15 @@
   boot.tmp.useTmpfs = true;
   boot.tmp.tmpfsSize = "90%"; 
 
-  # Auto-rebuild on boot
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:not-a-longneck/auto-nix";
-    flags = [ "--update-input" "nixpkgs" ];
-    dates = "reboot"; 
+  # Configure keyboard layout for X11/KDE
+  console.keyMap = "dk";
+  services.xserver.xkb = {
+    layout = "dk";
+    variant = "";
   };
+
+
+
 
   # =============================
   # ==== Apps and tools      ====
