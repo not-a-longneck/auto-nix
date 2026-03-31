@@ -1,4 +1,4 @@
-{ device ? "/dev/vda", ... }: { 
+{ device ? "/dev/vda", lib, ... }: { 
   disko.devices = {
     nodev."/" = {
       fsType = "tmpfs";
