@@ -8,5 +8,5 @@
 From target computer run:
 
 ```
-curl -L mylink.com/nixos | bash
+curl -L nix.mylink.com | bash
 ```
