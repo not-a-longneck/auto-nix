@@ -22,3 +22,9 @@ sudo nix --extra-experimental-features "nix-command flakes" \
   --mode disko \
   --flake github:not-a-teletubby/auto-nix#secure-laptop
 ```
+
+then run:
+
+```
+sudo nixos-install --flake github:not-a-teletubby/auto-nix#secure-laptop
+```
