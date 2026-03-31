@@ -8,14 +8,5 @@
 From target computer run:
 
 ```
-sudo nix --extra-experimental-features "nix-command flakes" \
-  run github:nix-community/disko -- \
-  --mode disko \
-  --flake github:not-a-teletubby/auto-nix#secure-laptop
-```
-
-then run:
-
-```
-sudo nixos-install --flake github:not-a-teletubby/auto-nix#secure-laptop
+curl -L mylink.com/nixos | bash
 ```
