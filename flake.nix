@@ -1,7 +1,9 @@
 {
+  description = "Privacy Fortress - Stateless NixOS Configuration";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -10,7 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # 1. Add the Plasma Manager input
     plasma-manager = {
       url = "github:pjones/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,14 +23,19 @@
     nixosConfigurations.secure-laptop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        # Import the Disko module for partitioning logic
         disko.nixosModules.disko
-        ./configuration.nix
         
+        # Import your main system configuration
+        ./configuration.nix
+
+        # Import Home Manager module
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          # 2. Change 'import' to a block that also imports the plasma module
+          
+          # This block maps your home.nix and the plasma-manager to the 'admin' user
           home-manager.users.admin = {
             imports = [
               ./home.nix
