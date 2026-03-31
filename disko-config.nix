@@ -19,7 +19,7 @@
            # Use a fixed size for the System (Nix Store)
            # 50GB is plenty for apps/drivers on a privacy machine
            nixos = {
-             size = "30%"; 
+             size = "15G"; 
              content = {
                type = "filesystem";
                format = "ext4";
@@ -28,7 +28,7 @@
            };
            # Let the Swap take 100% of the remaining space
            swap = {
-             size = "67%"; 
+             size = "100%"; 
              content = {
                type = "swap";
                randomEncryption = true;
