@@ -38,7 +38,7 @@
   '';
 
   # Tor browser
-  home.file.".tor-browser/profile.default/prefs.js".text = ''
+  home.file.".tor project/TorBrowser/Data/Browser/profile.default/user.js".text = ''
 
     // --- Privacy & Security ---
     user_pref("javascript.enabled", false);
